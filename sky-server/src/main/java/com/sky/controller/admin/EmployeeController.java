@@ -24,6 +24,14 @@ import java.util.Map;
 //@ApiModel	用在类上，例如entity、DTO、VO,也是说明功能
 //@ApiModelProperty	用在属性上，描述属性信息
 //@ApiOperation 用在方法上，例如Controller的方法，说明方法的用途、作用。
+
+//创建（增）：使用@PostMapping，因为POST请求通常用于在服务端创建新资源。
+//
+//读取（查）：使用@GetMapping，GET请求用于获取数据。
+//
+//更新（改）：使用@PutMapping或@PatchMapping（根据是否完全替换或部分更新），PUT请求用于更新资源。
+//
+//删除（删）：使用@DeleteMapping，DELETE请求用于删除资源。
 /**
  * 员工管理
  */
@@ -95,6 +103,13 @@ public class EmployeeController {
         log.info("员工分页查询,参数为：{}",employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用员工账号")
+    public Result startOrStop(@PathVariable("status") Integer status,Long id){
+        log.info("启用禁用员工账号：{},{}",status,id);
+        employeeService.startOrStop(status,id);
+        return Result.success();
     }
 
 }
