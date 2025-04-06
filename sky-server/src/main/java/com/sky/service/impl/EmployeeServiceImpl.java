@@ -124,5 +124,16 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.update(employee);
     }
 
+    @Override
+    public void updatePassword(Integer empId, String newPassword, String oldPassword) {
+        Employee employee = new Employee();
+        if(employee.getPassword().equals(oldPassword)){
+             employeeMapper.updatePassword(empId,newPassword);
+        }else {
+            System.out.println("密码不对");
+        }
+
+    }
+
 
 }

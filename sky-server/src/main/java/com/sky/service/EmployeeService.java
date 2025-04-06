@@ -25,4 +25,6 @@ public interface EmployeeService {
     Employee getById(Long id);
     //编辑员工信息
     void update(EmployeeDTO employeeDTO);
+    //修改密码
+    void updatePassword(Integer empId, String newPassword, String oldPassword);
 }

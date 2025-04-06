@@ -31,4 +31,7 @@ public interface EmployeeMapper {
     //根据id查询员工
     @Select("select * from employee where id = #{id}")
     Employee getById(Long id);
+    //根据id修改密码
+    @Update("update employee set password = #{newPassword} where id = #{empId}")
+    void updatePassword(Integer empId, String newPassword);
 }

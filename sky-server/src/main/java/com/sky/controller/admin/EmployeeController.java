@@ -87,6 +87,14 @@ public class EmployeeController {
     public Result<String> logout() {
         return Result.success();
     }
+    // TODO 未完成修改密码操作
+    @PutMapping("/editPassword")
+    @ApiOperation("根据id修改密码")
+    public Result updatePassword(@RequestBody Integer empId, @RequestBody String newPassword, @RequestBody String oldPassword){
+        log.info("修改密码,id:{},新密码：{},旧密码：{}",empId,newPassword,oldPassword);
+        employeeService.updatePassword(empId,newPassword,oldPassword);
+        return Result.success();
+    }
 
     @PostMapping
     @ApiOperation("新增员工")
@@ -112,7 +120,7 @@ public class EmployeeController {
         return Result.success();
     }
     @GetMapping("{id}")
-    @ApiOperation("查询员工信息")
+    @ApiOperation("根据id查询员工信息")
     public Result<Employee> getById(@PathVariable Long id){
         log.info("根据id查询员工:{}",id);
         Employee employee = employeeService.getById(id);
