@@ -5,6 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
+//作用：声明本类为配置属性类，Spring Boot 会自动将配置文件中以 sky.jwt 为前缀的属性注入到该类的对应字段中。
 @ConfigurationProperties(prefix = "sky.jwt")
 @Data
 public class JwtProperties {

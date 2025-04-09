@@ -32,6 +32,11 @@ public class JwtTokenAdminInterceptor implements HandlerInterceptor {
      * @return
      * @throws Exception
      */
+//    HttpServletRequest request：封装客户端请求信息，包括请求参数、请求头、请求方法等，通过该对象可以提取出 JWT 等认证信息。
+//
+//    HttpServletResponse response：封装服务器响应信息，用于设置状态码、响应头或返回错误信息，当校验失败时，可以设置 401 状态码告知客户端未授权。
+//
+//    Object handler：表示当前请求对应的处理器，通过判断其类型（如是否为 HandlerMethod），可以针对不同的请求类型执行不同的逻辑，例如跳过静态资源的拦截。
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         System.out.println("当前线程id："+Thread.currentThread().getId());

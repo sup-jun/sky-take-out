@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Slf4j
 public class AutoFillAspect {
     /**
-     * 切入点：拦截 com.sky.mapper 包下所有方法，
+     * 切入点：拦截 com.sky.mapper 包下所有方法， 就是对哪些类的哪些方法进行拦截
      * 且方法上标注了 @AutoFill 注解
      */
     @Pointcut("execution(* com.sky.mapper.*.*(..)) && @annotation(com.sky.annotation.AutoFill)")
