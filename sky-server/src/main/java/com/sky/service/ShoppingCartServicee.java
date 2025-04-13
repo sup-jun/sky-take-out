@@ -10,4 +10,6 @@ public interface ShoppingCartServicee {
     void addShoppingCart(ShoppingCartDTO shoppingCartDTO);
     //查看购物车
     List<ShoppingCart> showShoppingCart();
+    //清空购物车
+    void cleanShoppingCart();
 }
