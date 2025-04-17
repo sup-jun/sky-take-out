@@ -435,7 +435,6 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * 取消订单
-     *
      * @param ordersCancelDTO
      */
     public void cancel(OrdersCancelDTO ordersCancelDTO) throws Exception {
@@ -461,6 +460,48 @@ public class OrderServiceImpl implements OrderService {
         orders.setCancelReason(ordersCancelDTO.getCancelReason());
         orders.setCancelTime(LocalDateTime.now());
         orderMapper.update(orders);
+    }
+
+
+    /**
+     * 派送订单
+     * @param id
+     */
+    public void delivery(Long id) {
+        //根据id查询订单
+        Orders orderBD = orderMapper.getById(id);
+        // 校验订单是否存在，并且状态为3
+        if(orderBD == null || !orderBD.getStatus().equals(Orders.CONFIRMED)) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+        Orders orders = new Orders();
+        orders.setId(orderBD.getId());
+        // 更新订单状态,状态转为派送中
+        orders.setStatus(orders.DELIVERY_IN_PROGRESS);
+
+        orderMapper.update(orders);
+
+    }
+
+    /**
+     * 完成订单派送
+     * @param id
+     */
+    public void complete(Long id) {
+        //根据id查询订单
+        Orders orderBD = orderMapper.getById(id);
+        // 校验订单是否存在，并且状态为4
+        if(orderBD == null || !orderBD.getStatus().equals(Orders.DELIVERY_IN_PROGRESS)) {
+            throw new OrderBusinessException(MessageConstant.ORDER_STATUS_ERROR);
+        }
+        Orders orders = new Orders();
+        orders.setId(orderBD.getId());
+        // 更新订单状态,状态转为已完成
+        orders.setStatus(orders.COMPLETED);
+        orders.setDeliveryTime(LocalDateTime.now());
+
+        orderMapper.update(orders);
+
     }
 
 }

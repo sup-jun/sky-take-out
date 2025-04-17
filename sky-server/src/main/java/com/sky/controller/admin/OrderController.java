@@ -67,7 +67,7 @@ public class OrderController {
      */
     @PutMapping("/confirm")
     @ApiOperation("接单")
-    public Result confirm(OrdersConfirmDTO ordersConfirmDTO){
+    public Result confirm(@RequestBody OrdersConfirmDTO ordersConfirmDTO){
         orderService.confirm(ordersConfirmDTO);
         return Result.success();
     }
@@ -93,6 +93,30 @@ public class OrderController {
     @ApiOperation("取消订单")
     public Result cancel(@RequestBody OrdersCancelDTO ordersCancelDTO)throws Exception{
         orderService.cancel(ordersCancelDTO);
+        return Result.success();
+    }
+
+    /**
+     * 派送订单
+     * @param id
+     * @return
+     */
+    @PutMapping("/delivery/{id}")
+    @ApiOperation("派送订单")
+    public Result delivery(@PathVariable("id") Long id){
+        orderService.delivery(id);
+        return Result.success();
+    }
+
+    /**
+     * 完成订单
+     * @param id
+     * @return
+     */
+    @PutMapping("/complete/{id}")
+    @ApiOperation("完成订单")
+    public Result complete(@PathVariable("id") Long id){
+        orderService.complete(id);
         return Result.success();
     }
 
